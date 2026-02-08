@@ -2,36 +2,44 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>Telegram Web App</title>
+    <title>تسجيل المستخدم</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: var(--tg-theme-bg-color, #f5f5f5);
+            background: var(--tg-theme-bg-color, #f2f2f2);
             color: var(--tg-theme-text-color, #000);
             margin: 0;
             padding: 20px;
         }
         .card {
             background: var(--tg-theme-secondary-bg-color, #fff);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 20px;
-            text-align: center;
+            max-width: 420px;
+            margin: auto;
             box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
+        h2 { text-align: center; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
         }
         button {
             margin-top: 15px;
-            padding: 12px;
             width: 100%;
+            padding: 12px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
             background: #0088cc;
             color: white;
+            font-size: 16px;
             cursor: pointer;
         }
     </style>
@@ -39,11 +47,12 @@
 <body>
 
 <div class="card">
-    <h2>مرحباً 👋</h2>
-    <p>هذا Web App مرتبط ببوت تيليجرام</p>
-    <p><strong>أنور حمزه</strong></p>
+    <h2>تسجيل البيانات 📝</h2>
 
-    <button onclick="sendData()">إرسال بيانات للبوت</button>
+    <input type="text" id="name" placeholder="الاسم الكامل">
+    <input type="tel" id="phone" placeholder="رقم الهاتف">
+
+    <button onclick="sendData()">إرسال</button>
 </div>
 
 <script>
@@ -51,7 +60,20 @@
     tg.ready();
 
     function sendData() {
-        tg.sendData("مرحبا من Web App 🚀");
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        if (!name || !phone) {
+            alert("رجاءً املأ جميع الحقول");
+            return;
+        }
+
+        const data = {
+            name: name,
+            phone: phone
+        };
+
+        tg.sendData(JSON.stringify(data));
     }
 </script>
 
