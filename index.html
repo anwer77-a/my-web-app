@@ -2,30 +2,58 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>تطبيق ويب</title>
+    <title>Telegram Web App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
     <style>
         body {
-            font-family: Arial;
-            background: #f5f5f5;
-            text-align: center;
-            padding-top: 50px;
+            font-family: Arial, sans-serif;
+            background: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #000);
+            margin: 0;
+            padding: 20px;
         }
-        .box {
-            background: white;
-            padding: 30px;
-            margin: auto;
-            width: 80%;
-            max-width: 400px;
+        .card {
+            background: var(--tg-theme-secondary-bg-color, #fff);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            border: none;
             border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
+            font-size: 16px;
+            background: #0088cc;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>مرحباً 👋</h2>
-        <p>هذه صفحة Web App للبوت</p>
-        <p>أنور حمزه</p>
-    </div>
+
+<div class="card">
+    <h2>مرحباً 👋</h2>
+    <p>هذا Web App مرتبط ببوت تيليجرام</p>
+    <p><strong>أنور حمزه</strong></p>
+
+    <button onclick="sendData()">إرسال بيانات للبوت</button>
+</div>
+
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    function sendData() {
+        tg.sendData("مرحبا من Web App 🚀");
+    }
+</script>
+
 </body>
 </html>
