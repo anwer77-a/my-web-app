@@ -4,55 +4,120 @@
     <meta charset="UTF-8">
     <title>تسجيل المستخدم</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: var(--tg-theme-bg-color, #f2f2f2);
-            color: var(--tg-theme-text-color, #000);
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0088cc, #00b4db);
+            min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .card {
-            background: var(--tg-theme-secondary-bg-color, #fff);
-            border-radius: 14px;
-            padding: 20px;
-            max-width: 420px;
-            margin: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            background: #ffffff;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease;
         }
-        h2 { text-align: center; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 42px;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 10px 0 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
         input {
             width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
             font-size: 15px;
+            outline: none;
+            transition: border 0.3s;
         }
+
+        input:focus {
+            border-color: #0088cc;
+        }
+
         button {
-            margin-top: 15px;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
+            border-radius: 14px;
             border: none;
-            border-radius: 10px;
             background: #0088cc;
             color: white;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,136,204,0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>تسجيل البيانات 📝</h2>
+    <div class="logo">🚀</div>
+    <h2>تسجيل البيانات</h2>
 
-    <input type="text" id="name" placeholder="الاسم الكامل">
-    <input type="tel" id="phone" placeholder="رقم الهاتف">
+    <div class="input-group">
+        <input type="text" id="name" placeholder="الاسم الكامل">
+    </div>
 
-    <button onclick="sendData()">إرسال</button>
+    <div class="input-group">
+        <input type="tel" id="phone" placeholder="رقم الهاتف">
+    </div>
+
+    <button onclick="sendData()">تأكيد التسجيل</button>
+
+    <div class="footer">
+        Web App by Anwar Hamza
+    </div>
 </div>
 
 <script>
@@ -64,7 +129,7 @@
         const phone = document.getElementById("phone").value.trim();
 
         if (!name || !phone) {
-            alert("رجاءً املأ جميع الحقول");
+            alert("رجاءً أدخل الاسم ورقم الهاتف");
             return;
         }
 
