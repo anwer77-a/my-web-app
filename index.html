@@ -2,110 +2,78 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>تسجيل المستخدم</title>
+    <title>تسجيل الاسم</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Telegram Web App SDK -->
+    <!-- مكتبة تيليجرام -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background: linear-gradient(135deg, #0088cc, #00b4db);
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
         }
-
-        .card {
-            background: #ffffff;
-            width: 90%;
-            max-width: 380px;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo {
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 400px;
+            margin: auto;
             text-align: center;
-            font-size: 42px;
         }
-
-        h2 {
-            text-align: center;
-            margin: 10px 0 20px;
-            color: #333;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
         input {
             width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            font-size: 15px;
-            outline: none;
-            transition: border 0.3s;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
         }
-
-        input:focus {
-            border-color: #0088cc;
-        }
-
         button {
+            margin-top: 15px;
             width: 100%;
-            padding: 14px;
-            border-radius: 14px;
+            padding: 12px;
             border: none;
+            border-radius: 8px;
             background: #0088cc;
             color: white;
             font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,136,204,0.4);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 13px;
-            color: #777;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="logo">🚀</div>
-    <h2>تسجيل البيانات</h2>
+<div class="box">
+    <h2>اكتب اسمك</h2>
 
-    <div class="input-group">
+    <input id="name" type="text" placeholder="الاسم">
+
+    <button onclick="sendName()">تسجيل</button>
+</div>
+
+<script>
+    // تفعيل Web App
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    // هذه الدالة ترسل الاسم للبوت
+    function sendName() {
+        const name = document.getElementById("name").value.trim();
+
+        if (name === "") {
+            alert("اكتب اسمك أولًا");
+            return;
+        }
+
+        // نرسل الاسم فقط
+        tg.sendData(JSON.stringify({
+            name: name
+        }));
+    }
+</script>
+
+</body>
+</html>    <div class="input-group">
         <input type="text" id="name" placeholder="الاسم الكامل">
     </div>
 
